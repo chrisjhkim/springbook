@@ -37,9 +37,10 @@ public class Calculator {
 
 	
 	public Integer calcSum(String filePath) throws IOException {
+		// 3-35
 		BufferedReaderCallback sumCallback = new BufferedReaderCallback() {
 			@Override
-			public Integer doSomethingWithReader(BufferedReader br) throws IOException {
+ 			public Integer doSomethingWithReader(BufferedReader br) throws IOException {
 				Integer sum = 0;
 				String line = null;
 				while ((line = br.readLine()) != null ) {
@@ -47,7 +48,7 @@ public class Calculator {
 				}
 				return sum;
 			}
-		};ithub
+		};
 		return fileReadTemplate(filePath, sumCallback);
 	}
 
@@ -67,5 +68,20 @@ public class Calculator {
 				catch (IOException e) { System.out.println(e.getMessage());}
 			}
 		}
+	}
+
+	public Integer calcMultiply(String filePath) throws IOException {
+		BufferedReaderCallback multiplyCallback = new BufferedReaderCallback() {
+			@Override
+			public Integer doSomethingWithReader(BufferedReader br) throws IOException {
+				Integer multiply = 1;
+				String line = null;
+				while ((line = br.readLine()) != null ) {
+					multiply *= Integer.valueOf(line);
+				}
+				return multiply;
+			}
+		};
+		return fileReadTemplate(filePath, multiplyCallback);
 	}
 }
