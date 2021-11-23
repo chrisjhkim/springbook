@@ -17,12 +17,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import springbook.exception.EmptyResultDataAccessException;
 import springbook.user.dao.DaoFactory;
 import springbook.user.dao.UserDao;
 import springbook.user.domain.User;
@@ -108,6 +108,12 @@ public class UserDaoTest {
 		assertThat(dao.getCount(), is(0));
 		
 		dao.get("unkown_ID");
+	}
+	
+	@Test
+	public void getAll() {
+		// 3-52 skip
+		
 	}
 	
 	public static void main(String[] args ) throws ClassNotFoundException, SQLException {

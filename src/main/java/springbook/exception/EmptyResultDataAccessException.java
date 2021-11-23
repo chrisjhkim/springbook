@@ -3,10 +3,12 @@ package springbook.exception;
 import java.sql.SQLException;
 
 
-public class EmptyResultDataAccessException extends SQLException {
+public class EmptyResultDataAccessException extends org.springframework.dao.EmptyResultDataAccessException{
 
-	public EmptyResultDataAccessException(int i) {
+	public EmptyResultDataAccessException(int expectedSize) {
+		super(expectedSize);
 		// TODO Auto-generated constructor stub
 	}
+
 
 }
