@@ -15,6 +15,8 @@ import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.mysql.cj.exceptions.MysqlErrorNumbers;
+
 import springbook.exception.EmptyResultDataAccessException;
 import springbook.user.domain.User;
 
@@ -91,7 +93,7 @@ public class UserDao {
 //		);
 		// 3-48(text)
 		this.jdbcTemplate.update("insert into users(id, name, password) values (?,?,?)", user.getId(), user.getName(), user.getPassword());
-		
+//		MysqlErrorNumbers.duplicate
 	}
 	
 	public User get(String id) throws SQLException, EmptyResultDataAccessException {
