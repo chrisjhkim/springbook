@@ -1,23 +1,14 @@
 package springbook.user.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.mysql.cj.exceptions.MysqlErrorNumbers;
-
-import springbook.exception.EmptyResultDataAccessException;
 import springbook.user.domain.User;
 
 // 3-10
@@ -34,7 +25,7 @@ import springbook.user.domain.User;
 // 3-27
 // 3-28
 // 3-45
-public class UserDao {
+public class UserDaoJdbc implements UserDao{
 //	private Connection c;
 //	private JdbcContext jdbcContext;
 	private JdbcTemplate jdbcTemplate; // 3-45
@@ -71,7 +62,7 @@ public class UserDao {
 //		this.dataSource = dataSource;
 	}
 	
-	public void add(final User user) throws SQLException {
+	public void add(final User user) {
 		// 3-15
 		// 3-16
 		// 3-17
@@ -96,7 +87,7 @@ public class UserDao {
 //		MysqlErrorNumbers.duplicate
 	}
 	
-	public User get(String id) throws SQLException, EmptyResultDataAccessException {
+	public User get(String id) {
 		// 2-14
 //		this.c = connectionMaker.makeConnection();
 //		Connection c = dataSource.getConnection();

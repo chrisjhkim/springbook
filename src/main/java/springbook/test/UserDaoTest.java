@@ -17,6 +17,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.test.annotation.DirtiesContext;
@@ -25,6 +27,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import springbook.user.dao.DaoFactory;
 import springbook.user.dao.UserDao;
+import springbook.user.dao.UserDaoJdbc;
 import springbook.user.domain.User;
 
 
@@ -39,15 +42,18 @@ public class UserDaoTest {
 	private UserDao dao;
 //	@Autowired
 //	private ApplicationContext context;
+	User user1;
 	
 	@Before
 	public void setUp() {
+		System.out.println("@Before - setting user1");
+		user1 = new User("id", "name", "pw");
 		// 2-15
 		// 2-17
 		// 2-20
 //		this.dao = context.getBean("userDao", UserDao.class);
 		DataSource dataSource = new SingleConnectionDataSource("jdbc:mysql://localhost/springbook?serverTimezone=UTC", "user01", "user01", true);
-		dao.setDataSource(dataSource);
+//		dao.setDataSource(dataSource);																serverTimezone=Asia/Seoul
 	}
 	@Test
 	public void addAndGet() throws SQLException {
@@ -120,4 +126,13 @@ public class UserDaoTest {
 		// 2-6
 		JUnitCore.main("springbook.test.UserDaoTest");
 	}
+	
+	@Test(expected = DataIntegrityViolationException.class)
+	public void duplicateKey() {
+		dao.deleteAll();
+		
+		dao.add(user1);
+		dao.add(user1);
+	}
 }
+

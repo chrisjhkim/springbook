@@ -11,7 +11,7 @@
 	<!-- return new BeanClass(); = class="a.b.c.BeanClass"> -->
 	<bean id="connectionMaker" class="springbook.user.dao.DConnectionMaker" />
 	
-	<bean id="userDao" class="springbook.user.dao.UserDao">
+	<bean id="userDao" class="springbook.user.dao.UserDaoJdbc">
 <!-- 		<property name="jdbcContext" ref="jdbcContext"></property> -->
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
@@ -21,7 +21,8 @@
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" >
 		<property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/springbook" />
+<!-- 		<property name="url" value="jdbc:mysql://localhost/springbook" /> -->
+		<property name="url" value="jdbc:mysql://localhost/springbook?serverTimezone=UTC" />
 		<property name="username" value="user01" />
 		<property name="password" value="user01" />
 	</bean>
